@@ -13,6 +13,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Demo Video](#demo-video)
 - [Important Disclaimers](#important-disclaimers)
 - [Project Goals](#project-goals)
 - [Architecture](#architecture)
@@ -41,6 +42,20 @@ This project is a **technical proof-of-concept** showcasing enterprise-grade Go 
 - ❌ A production-ready automation tool
 - ❌ A LinkedIn scraper or bot
 - ❌ A system that bypasses platform safeguards
+
+---
+
+## 🎥 Demo Video
+
+A short walkthrough demonstrating:
+- Project setup and folder structure
+- Architecture and design decisions
+- Mock vs Rod browser implementation
+- Human-like behavior simulation
+- State persistence and safe execution
+
+▶️ **Watch the demo here:**  
+[VIDEO DEMO](https://youtu.be/ieyAdklGjZg)
 
 ---
 
@@ -146,7 +161,7 @@ linkedin-automation-poc/
 ├── go.mod                       # Go module dependencies
 ├── go.sum                       # Dependency checksums
 ├── README.md                    # Project documentation
-├── state.json                   # Persistent state (generated)
+├── state.json                   # Persistent state (generated at runtime, gitignored)
 └── LICENSE                      # License information
 ```
 
