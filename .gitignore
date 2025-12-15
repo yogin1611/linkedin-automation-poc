@@ -1,0 +1,16 @@
+# Environment files
+.env
+
+# Build artifacts
+bin/
+*.exe
+
+# Editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Runtime state
+state.json
