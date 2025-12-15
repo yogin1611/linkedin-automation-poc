@@ -488,7 +488,7 @@ See [LICENSE](LICENSE) file for full terms.
 ## 👨‍💻 Author
 
 **Heerath Bhat**
-- GitHub: [@yogin1611](https://github.com/yourusername)
+- GitHub: [@yogin1611](https://github.com/yogin1611)
 - LinkedIn: [Heerath Bhat](https://linkedin.com/in/heerathbhat)
 - Email: heerath.bhat@gmail.com
 
