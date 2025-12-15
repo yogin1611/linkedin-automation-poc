@@ -4,5 +4,5 @@ import "time"
 
 func IsWithinBusinessHours() bool {
 	hour := time.Now().Hour()
-	return hour >= 9 && hour <= 18
+	return hour >= 9 && hour <= 20
 }
