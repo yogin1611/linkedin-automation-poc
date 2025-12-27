@@ -1,12 +1,11 @@
 package main
 
 import (
-	"time"
-
 	"linkedin-automation/internal/behavior"
 	"linkedin-automation/internal/browser"
 	"linkedin-automation/internal/config"
 	"linkedin-automation/internal/logger"
+	"linkedin-automation/internal/messaging"
 	"linkedin-automation/internal/storage"
 )
 
@@ -23,11 +22,10 @@ func main() {
 		return
 	}
 
-	// Load persistent state
-	store := storage.NewJSONStore("state.json")
-	state, err := store.Load()
+	// Initialize persistent state store
+	store, err := storage.NewStateStore("state.json")
 	if err != nil {
-		log.Error("Failed to load state: " + err.Error())
+		log.Error("Failed to initialize state store: " + err.Error())
 		return
 	}
 
@@ -41,6 +39,9 @@ func main() {
 	// Initialize mock browser
 	br := browser.NewMockBrowser()
 
+	// Initialize messaging service
+	msgService := messaging.NewService(br, store)
+
 	// ---- Simulated human-like workflow ----
 
 	// Think before action
@@ -53,7 +54,10 @@ func main() {
 	)
 
 	// Open page (mock)
-	if err := br.Open("https://example.com"); err != nil {
+	profileURL := "https://linkedin.com/in/sample-profile"
+	profileName := "John Doe"
+
+	if err := br.Open(profileURL); err != nil {
 		log.Error("Failed to open page: " + err.Error())
 		return
 	}
@@ -61,25 +65,23 @@ func main() {
 	// Simulate scrolling
 	behavior.SimulateScrolling()
 
-	// Simulate typing (e.g., connection note / message)
-	behavior.SimulateTyping("Hello, thanks for connecting!")
+	// Simulate typing (pre-message interaction)
+	behavior.SimulateTyping("Reviewing profile...")
 
-	// Short & long pauses to mimic human pacing
+	// Short pause
 	beh.ShortPause()
-	beh.LongPause()
 
-	// Update state
-	state.OpenedURLs = append(state.OpenedURLs, "https://example.com")
-	state.LastRun = time.Now()
+	// ---- Messaging workflow ----
+	if err := msgService.Send(profileURL, profileName); err != nil {
+		log.Error("Failed to send message: " + err.Error())
+		return
+	}
+
+	// Long pause after messaging
+	beh.LongPause()
 
 	// Close browser (mock)
 	_ = br.Close()
 
-	// Save state
-	if err := store.Save(state); err != nil {
-		log.Error("Failed to save state: " + err.Error())
-		return
-	}
-
-	log.Info("State saved. Mock browser closed successfully")
+	log.Info("Workflow completed successfully (Mock Mode)")
 }

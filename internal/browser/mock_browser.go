@@ -27,3 +27,11 @@ func (m *MockBrowser) Close() error {
 	time.Sleep(1 * time.Second)
 	return nil
 }
+
+func (m *MockBrowser) SendMessage(profileURL string, message string) error {
+	fmt.Println("[MOCK MESSAGE] Sending message")
+	fmt.Println("To:", profileURL)
+	fmt.Println("Message:", message)
+	time.Sleep(1 * time.Second)
+	return nil
+}
